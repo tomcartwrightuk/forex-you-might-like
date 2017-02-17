@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe EcbParser do
+describe Fx::EcbParser do
   describe "#parse" do
     context "parsable file" do
       it "should return an array of exchange rates" do
         xml_doc = File.open("spec/fixtures/ecb-res.xml")
-        res = EcbParser.parse(xml_doc)
+        res = Fx::EcbParser.parse(xml_doc)
         expect(res).to include({
           date: Date.new(2017,2,15),
           currency: "USD",

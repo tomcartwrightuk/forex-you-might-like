@@ -99,5 +99,5 @@ RSpec.configure do |config|
 =end
 end
 require 'pry'
-require 'fx_parser'
-require 'ecb_parser'
+require 'fx/fx_parser'
+require 'fx/ecb_parser'
