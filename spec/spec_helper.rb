@@ -101,3 +101,4 @@ end
 require 'pry'
 require 'fx/fx_parser'
 require 'fx/ecb_parser'
+require 'fx/exchange_rate'
