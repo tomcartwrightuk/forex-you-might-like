@@ -10,8 +10,8 @@ module Fx
       new(default_store).rate_at(from, to)
     end
 
-    def import
-      day_rates = @parser.parse
+    def import(rate_xml)
+      day_rates = @parser.parse(rate_xml)
       @store.store_rates(day_rates)
     end
 

@@ -86,7 +86,7 @@ describe Exchange do
       allow(Exchange).to receive(:find_by_date_and_currency!).and_return(usd)
 
       returned_rate = Exchange.rate_at(usd_rate[:date], usd_rate[:currency])
-      expect(returned_rate).to eq(usd)
+      expect(returned_rate).to eq(1.065)
     end
 
     # This raises exception so that the consuming lib could create a null

@@ -6,11 +6,12 @@ class Exchange < ActiveRecord::Base
       rate_exists = find_by_date_and_currency(rate[:date], rate[:currency])
       unless rate_exists
         create!(rate)
+        logger.info "Importing #{rate.inspect}"
       end
     end
   end
 
   def self.rate_at(date, currency)
-    find_by_date_and_currency!(date, currency)
+    find_by_date_and_currency!(date, currency).rate
   end
 end
