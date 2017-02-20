@@ -15,6 +15,9 @@ module Fx
     end
 
     def rate_at(date, from_currency, to_currency)
+      base_rate = @store.rate_at(date, from_currency)
+      to_rate = @store.rate_at(date, to_currency)
+      (base_rate / to_rate).truncate(4)
     end
 
     private
