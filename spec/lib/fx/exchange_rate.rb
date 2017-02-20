@@ -19,7 +19,7 @@ describe Fx::ExchangeRate do
   describe ".import" do
     it "should pass rate to store" do
       store = double()
-      exchange = Fx::ExchangeRate.new(store, parser)
+      exchange = Fx::ExchangeRate.new(store, parser: parser)
       expect(store).to receive(:store_day_rates)
       exchange.import
     end
@@ -30,11 +30,31 @@ describe Fx::ExchangeRate do
       it "it should convert between non-euro currencies" do
         store = double()
         allow(store).to receive(:rate_at).and_return(usd_rate, gbp_rate)
-        exchange = Fx::ExchangeRate.new(store, parser)
+        exchange = Fx::ExchangeRate.new(store, parser: parser)
 
         rate = exchange.rate_at(Date.new, 'USD', 'GBP')
 
         expect(rate).to eq(BigDecimal('1.2424'))
+      end
+
+      it 'should convert between reference currency and non-ref currencies' do
+        store = double()
+        allow(store).to receive(:rate_at).and_return(usd_rate)
+        exchange = Fx::ExchangeRate.new(store, parser: parser)
+
+        rate = exchange.rate_at(Date.new, 'EUR', 'USD')
+
+        expect(rate).to eq(BigDecimal('0.9389'))
+      end
+
+      it 'should convert between non-reference currency and the ref currency' do
+        store = double()
+        allow(store).to receive(:rate_at).and_return(usd_rate)
+        exchange = Fx::ExchangeRate.new(store, parser: parser)
+
+        rate = exchange.rate_at(Date.new, 'USD', 'EUR')
+
+        expect(rate).to eq(BigDecimal('1.065'))
       end
     end
 

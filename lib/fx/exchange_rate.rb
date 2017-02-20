@@ -1,8 +1,9 @@
 module Fx
   class ExchangeRate
-    def initialize(store, parser = Fx::EcbParser)
+    def initialize(store, ref_currency: 'EUR', parser: Fx::EcbParser)
       @store = store
       @parser = parser
+      @ref_currency = ref_currency
     end
 
     def self.at(date, from, to)
@@ -15,15 +16,23 @@ module Fx
     end
 
     def rate_at(date, from_currency, to_currency)
-      base_rate = @store.rate_at(date, from_currency)
-      to_rate = @store.rate_at(date, to_currency)
-      (base_rate / to_rate).truncate(4)
+      from_rate = retrieve_rate(date, from_currency)
+      to_rate = retrieve_rate(date, to_currency)
+      (from_rate / to_rate).truncate(4)
     end
 
     private
 
-    def default_store(*args)
-
+    def self.default_store
     end
+
+    def retrieve_rate(date, currency)
+      if currency == @ref_currency
+        BigDecimal('1.0')
+      else
+        @store.rate_at(date, currency)
+      end
+    end
+
   end
 end
