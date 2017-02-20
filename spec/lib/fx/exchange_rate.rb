@@ -20,7 +20,7 @@ describe Fx::ExchangeRate do
     it "should pass rate to store" do
       store = double()
       exchange = Fx::ExchangeRate.new(store, parser: parser)
-      expect(store).to receive(:store_day_rates)
+      expect(store).to receive(:store_rates)
       exchange.import
     end
   end

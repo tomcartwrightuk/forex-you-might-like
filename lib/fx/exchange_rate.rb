@@ -12,7 +12,7 @@ module Fx
 
     def import
       day_rates = @parser.parse
-      @store.store_day_rates(day_rates)
+      @store.store_rates(day_rates)
     end
 
     def rate_at(date, from_currency, to_currency)
@@ -24,6 +24,7 @@ module Fx
     private
 
     def self.default_store
+      Exchange
     end
 
     def retrieve_rate(date, currency)
