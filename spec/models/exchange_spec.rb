@@ -22,7 +22,8 @@ describe Exchange do
   end
 
   # TODO test valid date is a valid Date object, rate is a valid decimal
-  # and inclusion of currencies in a list of valid currencies
+  # and inclusion of currencies in a list of valid currencies and uniqueness
+  # constraints
 
   # the following rate vars could be reused from before but if the format of
   # data passed to store rates changes, it's best to define that here. Plus, you
@@ -45,6 +46,19 @@ describe Exchange do
     it "should store an array of valid rates" do
       Exchange.store_rates(rates)
       expect(Exchange.count).to eq 2
+    end
+
+    it "should ignore duplicate rates" do
+      Exchange.store_rates(rates)
+      duped_rates = rates.push({
+        date: Date.new(2017, 2, 1),
+        currency: 'USD',
+        rate: usd_rate
+      })
+
+      expect {
+        Exchange.store_rates(duped_rates)
+      }.to change{ Exchange.count }.by 1
     end
 
     it "should throw an exception if a rate is invalid" do
