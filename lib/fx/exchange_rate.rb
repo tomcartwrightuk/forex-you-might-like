@@ -7,7 +7,7 @@ module Fx
     end
 
     def self.at(date, from, to)
-      new(default_store).rate_at(from, to)
+      new(default_store).rate_at(date, from, to)
     end
 
     def import(rate_xml)

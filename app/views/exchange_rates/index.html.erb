@@ -1,0 +1,21 @@
+<h1>Welcome to fx-you-might-like</h1>
+<%= form_tag(exchange_rates_path, method: "get") do %>
+  <%= label_tag 'date' %>
+  <%= date_field_tag(:date, Date.today, { min: Date.new(2017, 1, 1) , max: Date.today }) %>
+  <%= label_tag 'from_currency' %>
+  <%= select_tag "from_currency", options_for_select(@currencies) %>
+  <%= label_tag 'to_currency' %>
+  <%= select_tag "to_currency", options_for_select(@currencies) %>
+  <%= submit_tag "Convert" %>
+<% end %>
+<% if @rate %>
+  <p>
+    <%= params[:from_currency] %>
+    to
+    <%= params[:to_currency] %>
+    On
+    <%= @parsed_date.to_s %>
+    was
+    <b><%= @rate %></b>
+  </p>
+<% end %>
