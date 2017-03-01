@@ -3,7 +3,7 @@ require 'nokogiri'
 
 module Fx
   class EcbParser < FxParser
-    FX_RATE_URL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml"
+    FX_RATE_URL = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml?7c51b651fcfbe9ec05e40ce73e1c9153"
 
     def self.parse(fx_xml)
       rates = []
