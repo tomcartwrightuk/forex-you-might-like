@@ -9,6 +9,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'nokogiri', "1.7.0.1"
 gem 'rspec-rails'
 gem 'capybara'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 
 group :development, :test do

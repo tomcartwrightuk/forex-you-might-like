@@ -1,0 +1,13 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.app-container {
+  width: 300px;
+  margin: 50px;
+}
+
+.col {
+  width: 45%;
+  margin-right: 5%;
+  float: left;
+}
